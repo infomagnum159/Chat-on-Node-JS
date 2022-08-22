@@ -1,8 +1,12 @@
 import {
     ADD_MESSAGE_FAILURE,
     ADD_MESSAGE_REQUEST,
-    ADD_MESSAGE_SUCCESS, CHANGE_TEXT, GET_MESSAGES_FAILURE,
-    GET_MESSAGES_REQUEST, GET_MESSAGES_SUCCESS
+    ADD_MESSAGE_SUCCESS,
+    CHANGE_TEXT,
+
+    GET_MESSAGES_FAILURE,
+    GET_MESSAGES_REQUEST,
+    GET_MESSAGES_SUCCESS
 } from "../actions/messageActions";
 
 const initialState = {
@@ -11,6 +15,7 @@ const initialState = {
     posts: [],
     loading: false,
     error: null,
+    datetime: '',
 };
 
 const messageReducer = (state = initialState, action) => {
@@ -25,10 +30,9 @@ const messageReducer = (state = initialState, action) => {
         case ADD_MESSAGE_FAILURE:
             return {...state, loading: false};
         case GET_MESSAGES_REQUEST:
-            return {...state, loading: true,};
+            return {...state, loading: true};
         case GET_MESSAGES_SUCCESS:
             return {...state, posts: action.payload, loading: false};
-
         case GET_MESSAGES_FAILURE:
             return {...state, loading: false};
         case CHANGE_TEXT:

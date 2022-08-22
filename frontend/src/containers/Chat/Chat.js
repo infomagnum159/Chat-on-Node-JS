@@ -12,12 +12,13 @@ const Chat = () => {
     const posts = useSelector(state => state.messenger.posts);
     // const datetime = useSelector(state => state.messenger.datetime);
 
-    useEffect( () => {
-        const timeOut = setTimeout( ()=> {
+    // useEffect( () => {
+    //     const timeOut = setTimeout( ()=> {
+    //
+    //     }, 2000)
+    //     return() => clearTimeout(timeOut)
+    // }, []);
 
-        }, 2000)
-        return() => clearTimeout(timeOut)
-    }, []);
 
     const changeMessage = e => {
         const {name, value} = e.target;
@@ -36,6 +37,13 @@ const Chat = () => {
     useEffect( () => {
         dispatch(getMessages())
     }, [dispatch]);
+
+    // useEffect(() => {
+    //     let interval = setInterval (() => {
+    //         dispatch(getLastMessages(datetime, posts));
+    //     },2000)
+    //     return () => clearInterval(interval);
+    // }, [dispatch, datetime, posts])
     return (
         <div style={{display: "flex", marginLeft: '50px'}}>
             <AddMessages
@@ -44,8 +52,7 @@ const Chat = () => {
                 author={state.author}
                 message={state.message}
             />
-            <div style={{overflowX: "hidden", overflowY: "scroll", height: '350px', marginLeft: '100px'
-            }}>
+            <div style={{overflowX: "hidden", overflowY: "scroll", height: '350px', marginLeft: '100px'}}>
                 {posts.map((message, index) => (
                     <Messages
                         key={index}
@@ -56,8 +63,6 @@ const Chat = () => {
 
                 ))}
             </div>
-
-
         </div>
     );
 };
