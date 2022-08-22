@@ -5,8 +5,17 @@ const db = require("../fileDB");
 
 router.get("/", (req, res) => {
     const messages = db.getMessages();
-
-    res.send(messages.slice(-30));
+    const date = new Date(req.query.datetime)
+    if (req.query.datetime) {
+        if (isNaN(date.getDate())) {
+            res.status(400).send({error: "Invalid date"})
+        } else {
+            const data = messages.filter(message => message.datetime > req.query.datetime)
+            res.send(data);
+        }
+    } else {
+        res.send(messages.slice(-30));
+    }
 
 });
 
